@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { startTransition } from "react";
 
 const getBooks = createAsyncThunk("book/getBooks", async (arg, thunkAPT) => {
   try {
@@ -16,7 +17,18 @@ const initialState = {
 export const bookSlice = createSlice({
   name: "book",
   initialState,
-  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getBooks.pending, (state, action) => {
+        console.log(action);
+      })
+      .addCase(getBooks.fulfilled, (state, action) => {
+        console.log(action);
+      })
+      .addCase(getBooks.rejected, (state, action) => {
+        console.log(action);
+      });
+  },
 });
 
 export const { increment, decrement, incrementByAmount } = bookSlice.actions;
