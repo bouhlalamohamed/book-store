@@ -1,1 +1,16 @@
-[]
+{
+  "books": [
+    {
+      "title": "learn js",
+      "price": 12,
+      "description": "learn js in 30 days",
+      "id": 1
+    },
+    {
+      "title": "learn C#",
+      "price": 20,
+      "description": "learn c# in 30 days",
+      "id": 2
+    }
+  ]
+}

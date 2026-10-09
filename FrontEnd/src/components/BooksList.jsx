@@ -9,10 +9,12 @@ import {
 } from "@mui/material";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Progress from "./Progress";
 
 export default function BooksList() {
   return (
     <Container sx={{ mt: 1 }}>
+      <Progress sx={{ display: "none" }} />
       <Typography variant="h5" fontWeight="bold" gutterBottom>
         Books List
       </Typography>
