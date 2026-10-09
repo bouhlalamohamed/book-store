@@ -11,13 +11,13 @@ function App() {
   useEffect(() => {
     dispatch(getBooks());
   }, []);
-  const { isLOading } = useSelector((state) => state.book);
+  const { isLOading, books } = useSelector((state) => state.book);
   return (
     <Container>
       <AddForm />
       <Divider orientation="horizontal" flexItem sx={{ mt: 8 }} />
       <Container sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-        <BooksList isLOading={isLOading} />
+        <BooksList isLOading={isLOading} books={books} />
         <Divider orientation="vertical" variant="middle" flexItem />
         <BooksDetail />
       </Container>
