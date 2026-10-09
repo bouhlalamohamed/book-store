@@ -4,11 +4,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button,
-  Stack,
 } from "@mui/material";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 export default function BooksDetail() {
   return (
     <Container
