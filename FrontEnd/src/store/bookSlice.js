@@ -1,7 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-// Define a type for the slice state
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Define the initial state using that type
+const getBooks = createAsyncThunk("book/getBooks", async (arg, thunkAPT) => {
+  try {
+    const res = await fetch("http://localhost:3005/books");
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
 const initialState = {
   books: null,
 };
