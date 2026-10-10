@@ -4,18 +4,20 @@ import { startTransition } from "react";
 export const getBooks = createAsyncThunk(
   "book/getBooks",
   async (arg, thunkAPT) => {
+    const { rejectWithValue } = thunkAPT;
     try {
       const res = await fetch("http://localhost:3005/books");
       const data = await res.json();
       return data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.message);
     }
   },
 );
 const initialState = {
   books: [],
   isLOading: false,
+  errorFetch: null,
 };
 
 export const bookSlice = createSlice({
@@ -32,6 +34,7 @@ export const bookSlice = createSlice({
       })
       .addCase(getBooks.rejected, (state, action) => {
         state.isLOading = false;
+        state.errorFetch = true;
       });
   },
 });
