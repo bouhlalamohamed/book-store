@@ -6,14 +6,16 @@ import BooksDetail from "./components/BooksDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooks } from "./store/bookSlice.js";
 import { useEffect } from "react";
+import SnackBar from "./components/SnackBar.jsx";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBooks());
   }, []);
-  const { isLOading, books } = useSelector((state) => state.book);
+  const { isLOading, books, errorFetch } = useSelector((state) => state.book);
   return (
     <Container>
+      <SnackBar errorFetch={errorFetch} />
       <AddForm />
       <Divider orientation="horizontal" flexItem sx={{ mt: 8 }} />
       <Container sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
