@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { insertBook } from "../store/insertBook.js";
+
 import {
   Box,
   Button,
@@ -10,9 +13,27 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import { useRef } from "react";
 
 export default function AddForm() {
+  const dispatch = useDispatch();
+  const title = useRef(null);
+  const price = useRef(null);
+  const description = useRef(null);
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(title.current.value);
+    const data = {
+      title: title.current.value,
+      price: Number(price.current.value),
+      description: description.current.value,
+      id: "1",
+    };
+    dispatch(insertBook(data));
+    title.current.value = null;
+    price.current.value = null;
+    description.current.value = null;
+  }
   return (
     <Box
       component="form"
@@ -29,9 +50,21 @@ export default function AddForm() {
         Insert Book
       </Typography>
 
-      <TextField label="title " variant="outlined" fullWidth margin="normal" />
+      <TextField
+        label="title"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        inputRef={title}
+      />
 
-      <TextField label="price" type="number" fullWidth margin="normal" />
+      <TextField
+        label="price"
+        type="number"
+        fullWidth
+        margin="normal"
+        inputRef={price}
+      />
 
       <TextField
         label="description"
@@ -39,9 +72,16 @@ export default function AddForm() {
         rows={4}
         fullWidth
         margin="normal"
+        inputRef={description}
       />
 
-      <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
+      <Button
+        type="submit"
+        variant="contained"
+        fullWidth
+        sx={{ mt: 2 }}
+        onClick={handleSubmit}
+      >
         submit
       </Button>
     </Box>
