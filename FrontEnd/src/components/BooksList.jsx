@@ -10,9 +10,12 @@ import {
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Progress from "./Progress";
+import { deleteBooks } from "../store/deleteBooks.js";
+import { useDispatch } from "react-redux";
 
 export default function BooksList({ isLOading, books }) {
-  console.log(books);
+  const dispatch = useDispatch();
+
   const bookData =
     books.length > 0
       ? books.map((iteam) => (
@@ -39,6 +42,9 @@ export default function BooksList({ isLOading, books }) {
                     color="error"
                     size="small"
                     startIcon={<DeleteIcon />}
+                    onClick={() => {
+                      dispatch(deleteBooks({ id: iteam.id }));
+                    }}
                   >
                     Delete
                   </Button>
@@ -61,14 +67,14 @@ export default function BooksList({ isLOading, books }) {
       : "no books to show";
   return (
     <Container sx={{ mt: 1 }}>
+      <Typography variant="h5" fontWeight="bold" gutterBottom>
+        Books List
+      </Typography>
+
       {isLOading ? (
         <Progress />
       ) : (
         <>
-          <Typography variant="h5" fontWeight="bold" gutterBottom>
-            Books List
-          </Typography>
-
           <List>{bookData}</List>
         </>
       )}
