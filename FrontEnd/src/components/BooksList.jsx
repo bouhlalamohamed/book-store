@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Progress from "./Progress";
 import { deleteBooks } from "../store/deleteBooks.js";
 import { useDispatch } from "react-redux";
+import { handlleRead } from "../store/readBoook.js";
 
 export default function BooksList({ isLOading, books }) {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ export default function BooksList({ isLOading, books }) {
                     color="primary"
                     size="small"
                     startIcon={<MenuBookIcon />}
+                    onClick={() => {
+                      dispatch(handlleRead({ iteam }));
+                    }}
                   >
                     Read
                   </Button>
