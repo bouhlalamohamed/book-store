@@ -1,38 +1,54 @@
 import { useDispatch } from "react-redux";
 import { insertBook } from "../store/insertBook.js";
 
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { useRef } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { updateBook, clearBookToUpdate } from "../store/updateBook.js";
+import { iteamBook } from "../store/updateBook.js";
 
 export default function AddForm() {
+  const { iteam } = useSelector((state) => state.iteamBook);
+  // console.log(isUpdate);
   const dispatch = useDispatch();
-  const title = useRef(null);
-  const price = useRef(null);
-  const description = useRef(null);
+  const [formData, setFormData] = useState({
+    title: "",
+    price: "",
+    description: "",
+  });
+
+  useEffect(() => {
+    if (Object.keys(iteam).length > 0) {
+      setFormData({
+        title: iteam.title || "",
+        price: iteam.price || "",
+        description: iteam.description || "",
+        id: iteam.id || "",
+      });
+    } else {
+      setFormData({ title: "", price: "", description: "" });
+    }
+  }, [iteam]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(title.current.value);
-    const data = {
-      title: title.current.value,
-      price: Number(price.current.value),
-      description: description.current.value,
-      id: "1",
-    };
-    dispatch(insertBook(data));
-    title.current.value = null;
-    price.current.value = null;
-    description.current.value = null;
+
+    if (Object.keys(iteam).length > 0) {
+      dispatch(updateBook(formData));
+      dispatch(clearBookToUpdate());
+    } else {
+      //
+      dispatch(insertBook(formData));
+      dispatch(clearBookToUpdate());
+    }
   }
   return (
     <Box
@@ -51,28 +67,33 @@ export default function AddForm() {
       </Typography>
 
       <TextField
-        label="title"
         variant="outlined"
+        name="title"
         fullWidth
         margin="normal"
-        inputRef={title}
+        placeholder="title"
+        value={formData.title}
+        onChange={handleChange}
       />
-
       <TextField
-        label="price"
         type="number"
+        name="price"
         fullWidth
         margin="normal"
-        inputRef={price}
+        placeholder="price"
+        value={formData.price}
+        onChange={handleChange}
       />
 
       <TextField
-        label="description"
+        placeholder="description"
+        name="description"
         multiline
         rows={4}
         fullWidth
         margin="normal"
-        inputRef={description}
+        value={formData.description}
+        onChange={handleChange}
       />
 
       <Button
@@ -82,6 +103,7 @@ export default function AddForm() {
         sx={{ mt: 2 }}
         onClick={handleSubmit}
       >
+        {/* {Object.keys(iteam).length > 0 ? "update" : "submit"} */}
         submit
       </Button>
     </Box>

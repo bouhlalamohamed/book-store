@@ -6,13 +6,16 @@ import {
   ListItemText,
   Button,
   Stack,
+  IconButton,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Progress from "./Progress";
 import { deleteBooks } from "../store/deleteBooks.js";
 import { useDispatch } from "react-redux";
 import { handlleRead } from "../store/readBoook.js";
+import { iteamBook, setUpdate } from "../store/updateBook.js";
 
 export default function BooksList({ isLOading, books }) {
   const dispatch = useDispatch();
@@ -29,29 +32,41 @@ export default function BooksList({ isLOading, books }) {
               }}
               secondaryAction={
                 <Stack direction="row" spacing={1}>
-                  <Button
+                  <IconButton
+                    aria-label=""
                     variant="contained"
                     color="primary"
                     size="small"
-                    startIcon={<MenuBookIcon />}
                     onClick={() => {
                       dispatch(handlleRead({ iteam }));
                     }}
                   >
-                    Read
-                  </Button>
+                    <MenuBookIcon />
+                  </IconButton>
 
-                  <Button
+                  <IconButton
+                    aria-label=""
                     variant="contained"
                     color="error"
                     size="small"
-                    startIcon={<DeleteIcon />}
                     onClick={() => {
                       dispatch(deleteBooks({ id: iteam.id }));
                     }}
                   >
-                    Delete
-                  </Button>
+                    <DeleteIcon />
+                  </IconButton>
+                  <IconButton
+                    aria-label=""
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    onClick={() => {
+                      dispatch(iteamBook(iteam));
+                      // dispatch(setUpdate());
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
                 </Stack>
               }
             >
