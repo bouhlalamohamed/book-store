@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 export default function BooksDetail() {
   const { Readed } = useSelector((state) => state.readBook);
-  console.log(Readed.iteam);
+  // console.log(Readed.iteam);
 
   return (
     <Container

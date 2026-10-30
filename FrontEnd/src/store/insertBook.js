@@ -13,6 +13,8 @@ export const insertBook = createAsyncThunk(
         body: JSON.stringify(booData),
       });
       dispatch(getBooks());
+      dispatch(getBooks());
+
       const data = (await res).json();
       return data;
     } catch (error) {

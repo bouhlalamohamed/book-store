@@ -1,4 +1,4 @@
-import { Container, Divider } from "@mui/material";
+import { Box, Container, Divider } from "@mui/material";
 
 import AddForm from "./components/AddForm";
 import BooksList from "./components/BooksList.jsx";
@@ -11,18 +11,18 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBooks());
-  }, []);
+  }, [dispatch]);
   const { isLOading, books, errorFetch } = useSelector((state) => state.book);
   return (
     <Container>
       <SnackBar errorFetch={errorFetch} />
       <AddForm />
       <Divider orientation="horizontal" flexItem sx={{ mt: 8 }} />
-      <Container sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
         <BooksList isLOading={isLOading} books={books} />
         <Divider orientation="vertical" variant="middle" flexItem />
         <BooksDetail />
-      </Container>
+      </Box>
     </Container>
   );
 }

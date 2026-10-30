@@ -1,0 +1,11 @@
+/* /* body {
+  scrollbar-width: thin;
+  overflow-y: auto;
+  scrollbar-color: #dd0303 #720808;
+} */
+
+/* ::-webkit-scrollbar {
+  width: 10px;
+  height: 200px;
+  background-color: aqua;
+} */

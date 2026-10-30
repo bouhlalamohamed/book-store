@@ -14,15 +14,14 @@ export const getBooks = createAsyncThunk(
     }
   },
 );
-const initialState = {
-  books: [],
-  isLOading: false,
-  errorFetch: null,
-};
 
 export const bookSlice = createSlice({
   name: "book",
-  initialState,
+  initialState: {
+    books: [],
+    isLOading: false,
+    errorFetch: null,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getBooks.pending, (state, action) => {

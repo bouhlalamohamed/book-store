@@ -1,16 +1,23 @@
 {
   "books": [
     {
-      "title": "learn js",
-      "price": 12,
-      "description": "learn js in 30 days",
-      "id": 1
+      "title": "ààrr",
+      "price": "",
+      "description": "",
+      "id": "PmL6zacN45o"
     },
     {
-      "title": "learn C#",
-      "price": 20,
-      "description": "learn c# in 30 days",
-      "id": 2
+      "title": "hhh",
+      "price": "",
+      "description": "",
+      "id": "OagjQ91-llc"
+    },
+    {
+      "title": "hhhhfff",
+      "price": "",
+      "description": "",
+      "id": "i4jK0zQIrLQ"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
